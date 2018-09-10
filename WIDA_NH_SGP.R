@@ -1,6 +1,6 @@
 ##########################################################################################
 ###
-### Script for calculating SGPs for 2017-2018 WIDA/ACCESS Indiana
+### Script for calculating SGPs for 2017-2018 WIDA/ACCESS New Hampshire
 ###
 ##########################################################################################
 
@@ -21,12 +21,13 @@ load("Data/WIDA_NH_Data_LONG.Rdata")
 WIDA_NH_SGP <- abcSGP(
 		WIDA_NH_Data_LONG,
 		steps=c("prepareSGP", "analyzeSGP", "combineSGP", "visualizeSGP", "outputSGP"),
+#		steps=c("prepareSGP", "analyzeSGP", "combineSGP", "outputSGP"),
 		sgp.percentiles=TRUE,
 		sgp.projections=TRUE,
 		sgp.projections.lagged=TRUE,
-		sgp.percentiles.baseline=FALSE,
-		sgp.projections.baseline=FALSE,
-		sgp.projections.lagged.baseline=FALSE,
+		sgp.percentiles.baseline=TRUE,
+		sgp.projections.baseline=TRUE,
+		sgp.projections.lagged.baseline=TRUE,
 		get.cohort.data.info=TRUE,
 		sgp.target.scale.scores=TRUE,
 		plot.types=c("growthAchievementPlot", "studentGrowthPlot"),
