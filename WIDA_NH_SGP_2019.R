@@ -1,6 +1,6 @@
 ##########################################################################################
 ###
-### Script for calculating SGPs for 2017-2018 WIDA/ACCESS New Hampshire
+### Script for calculating SGPs for 2018-2019 WIDA/ACCESS New Hampshire
 ###
 ##########################################################################################
 
@@ -11,13 +11,15 @@ require(SGP)
 
 ### Load Data
 
-load("Data/WIDA_NH_Data_LONG.Rdata")
+load("Data/WIDA_NH_SGP.Rdata")
+load("Data/WIDA_NH_Data_LONG_2019.Rdata")
 
 
-### Run abcSGP
+### Run updateSGP
 
-WIDA_NH_SGP <- abcSGP(
-		WIDA_NH_Data_LONG,
+WIDA_NH_SGP <- updateSGP(
+		WIDA_NH_SGP,
+		WIDA_NH_Data_LONG_2019,
 		steps=c("prepareSGP", "analyzeSGP", "combineSGP", "visualizeSGP", "outputSGP"),
 		sgp.percentiles=TRUE,
 		sgp.projections=TRUE,
@@ -34,4 +36,4 @@ WIDA_NH_SGP <- abcSGP(
 
 ### Save results
 
-save(WIDA_NH_SGP, file="Data/WIDA_NH_SGP.Rdata")
+#save(WIDA_NH_SGP, file="Data/WIDA_NH_SGP.Rdata")
