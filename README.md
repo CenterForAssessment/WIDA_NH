@@ -1,4 +1,4 @@
-# WIDA Georgia
+WIDA New Hampshire
 =============
 
 SGP analysis source code & documentation
