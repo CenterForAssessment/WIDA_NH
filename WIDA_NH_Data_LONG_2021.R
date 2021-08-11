@@ -26,12 +26,11 @@ strhead <- function (s, n) {
 
 
 ### Load Data
-
 WIDA_NH_Data_LONG_2021 <- fread("Data/Base_Files/ESOLDatafor2021.dat", colClasses=rep("character", 5))
+WIDA_NH_Data_LONG_2021_SUPPLEMENTARY <- fread("Data/Base_Files/ESOL_Scores_with_US_entered.csv")
 
 
 ### Clean Up Data
-
 setnames(WIDA_NH_Data_LONG_2021, c("YEAR", "ID", "GRADE", "SCALE_SCORE", "ACHIEVEMENT_LEVEL_ORIGINAL"))
 WIDA_NH_Data_LONG_2021[,GRADE:=as.character(as.numeric(GRADE))]
 WIDA_NH_Data_LONG_2021[,SCALE_SCORE:=as.numeric(SCALE_SCORE)]
@@ -42,20 +41,25 @@ WIDA_NH_Data_LONG_2021[!is.na(ACHIEVEMENT_LEVEL),ACHIEVEMENT_LEVEL := paste("WID
 WIDA_NH_Data_LONG_2021[,VALID_CASE := "VALID_CASE"]
 WIDA_NH_Data_LONG_2021[,CONTENT_AREA := "READING"]
 
-
-
-
 ### Check for duplicates
-
 setkey(WIDA_NH_Data_LONG_2021, VALID_CASE, CONTENT_AREA, YEAR, GRADE, ID, SCALE_SCORE)
 setkey(WIDA_NH_Data_LONG_2021, VALID_CASE, CONTENT_AREA, YEAR, GRADE, ID)
 WIDA_NH_Data_LONG_2021[which(duplicated(WIDA_NH_Data_LONG_2021, by=key(WIDA_NH_Data_LONG_2021)))-1, VALID_CASE := "INVALID_CASE"]
+
+
+### Clean up and merge in years in us
+WIDA_NH_Data_LONG_2021_SUPPLEMENTARY <- WIDA_NH_Data_LONG_2021_SUPPLEMENTARY[,c("StudentID", "yrusentered"), with=FALSE]
+setnames(WIDA_NH_Data_LONG_2021_SUPPLEMENTARY, c("ID", "YEAR_ENTERED_US"))
+WIDA_NH_Data_LONG_2021_SUPPLEMENTARY[,ID:=as.character(ID)]
+WIDA_NH_Data_LONG_2021_SUPPLEMENTARY[YEAR_ENTERED_US=="NULL", YEAR_ENTERED_US:=NA]
+setkey(WIDA_NH_Data_LONG_2021_SUPPLEMENTARY, ID)
+setkey(WIDA_NH_Data_LONG_2021, ID)
+WIDA_NH_Data_LONG_2021 <- WIDA_NH_Data_LONG_2021_SUPPLEMENTARY[WIDA_NH_Data_LONG_2021]
 setkey(WIDA_NH_Data_LONG_2021, VALID_CASE, CONTENT_AREA, YEAR, GRADE, ID)
 
 
 ### Reorder
-
-setcolorder(WIDA_NH_Data_LONG_2021, c(7,8,1,2,3,4,6,5))
+setcolorder(WIDA_NH_Data_LONG_2021, c(8,9,1,3,4,5,7,6,2))
 
 
 ### Save data

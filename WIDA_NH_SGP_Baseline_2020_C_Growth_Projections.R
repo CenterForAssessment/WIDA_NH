@@ -29,8 +29,8 @@ WIDA_NH_SGP <- abcSGP(
         sgp.projections.lagged.baseline = FALSE,
         save.intermediate.results = FALSE,
         parallel.config = list(
-					BACKEND = "PARALLEL",
-          WORKERS=list(PROJECTIONS=8))
+	BACKEND = "PARALLEL",
+       WORKERS=list(PROJECTIONS=8))
 )
 
 ###   Save results

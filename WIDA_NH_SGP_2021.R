@@ -12,7 +12,7 @@ load("Data/WIDA_NH_SGP.Rdata")
 load("Data/WIDA_NH_Data_LONG_2021.Rdata")
 
 ###   Add single-cohort baseline matrices to SGPstateData
-SGPstateData <- SGPmatrices::addBaselineMatrices("WIDA_NH", "2021")
+SGPstateData <- SGPmatrices::addBaselineMatrices("WIDA", "2021", "WIDA_NH")
 
 ### Run updateSGP
 WIDA_NH_SGP <- updateSGP(

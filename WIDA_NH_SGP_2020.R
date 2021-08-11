@@ -14,6 +14,10 @@ require(SGP)
 load("Data/WIDA_NH_SGP.Rdata")
 load("Data/WIDA_NH_Data_LONG_2020.Rdata")
 
+### Add in baseline matrices
+
+SGPstateData <- SGPmatrices::addBaselineMatrices("WIDA", "2020", "WIDA_NH")
+
 
 ### Run updateSGP
 
@@ -36,4 +40,4 @@ WIDA_NH_SGP <- updateSGP(
 
 ### Save results
 
-#save(WIDA_NH_SGP, file="Data/WIDA_NH_SGP.Rdata")
+save(WIDA_NH_SGP, file="Data/WIDA_NH_SGP.Rdata")
