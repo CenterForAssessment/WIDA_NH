@@ -44,4 +44,4 @@ WIDA_NH_SGP <- abcSGP(
 
 
 ### Save results
-#save(WIDA_NH_SGP, file="Data/WIDA_NH_SGP.Rdata")
+save(WIDA_NH_SGP, file="Data/WIDA_NH_SGP.Rdata")
